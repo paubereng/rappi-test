@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Collapse} from 'react-collapse';
-import categories from '../json/categories.json';
 
 class CategoriesMenu extends Component{
   constructor(props) {
@@ -32,10 +31,10 @@ class CategoriesMenu extends Component{
   }
 
   render(){
-    console.log(categories)
+    let { data } = this.props;
     return (
       <div className="category-menu">
-        {categories.categories.map((category,i) => {
+        {this.props.data.map((category,i) => {
           return (
             <div key={i} style={{borderBottom: '1px solid grey'}}>
               {this.renderlevel(category)}
