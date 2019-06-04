@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import ShopContainer from './ShopContainer';
+import MainMenu from '../components/MainMenu';
+import Footer from '../components/Footer';
 
 class MainContainer extends Component{
   constructor(props) {
@@ -13,7 +12,9 @@ class MainContainer extends Component{
   render(){
     return (
       <Container>
-        <ShopContainer />
+        <MainMenu />
+        {this.props.children}
+        <Footer />
       </Container>
     );
   };
