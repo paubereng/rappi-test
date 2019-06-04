@@ -1,11 +1,11 @@
 import React from 'react';
-import ShopContainer from './containers/ShopContainer';
+import MainContainer from './containers/MainContainer';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <ShopContainer />
+      <MainContainer />
     </div>
   );
 }
