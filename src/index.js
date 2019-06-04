@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.min.css';
 import './index.css';
 import './App.css';
-import Routes from './routes';
+import Routes from './routes/routes';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<Routes />, document.getElementById('root'));
