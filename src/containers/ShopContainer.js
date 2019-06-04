@@ -17,7 +17,9 @@ class MainContainer extends Component{
           <Col xs={4}>
             <CategoriesMenu />
           </Col>
-          <Col xs={8}>sm=8</Col>
+          <Col xs={8}>
+            <h1>Products</h1>
+          </Col>
         </Row>
       </Container>
     );
