@@ -13,7 +13,9 @@ class MainContainer extends Component{
     return (
       <Container>
         <MainMenu />
-        {this.props.children}
+        <div className="main-container">
+          {this.props.children}
+        </div>
         <Footer />
       </Container>
     );

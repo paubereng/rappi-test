@@ -1,5 +1,6 @@
-.container {
-  height: calc(100vh - 140px);
+.main-container {
+  /*min-height: calc(100vh - 140px);*/
+  min-height: calc(100vh - 140px);
 }
 .category-menu {
   padding: 0 0 0 15px;
@@ -12,4 +13,23 @@
 }
 .nav-link {
   align-self: center;
+}
+.product-list {
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+.product-item {
+  width: 275px;
+  margin: 10px;
+}
+.card-footer {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+}
+.card--disabled {
+  background: #f0efef61;
+  opacity: 0.7;  
 }
