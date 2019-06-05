@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Collapse} from 'react-collapse';
+import { Collapse } from 'react-collapse';
+import cs from 'classnames';
 
 class CategoriesMenu extends Component{
   constructor(props) {
@@ -13,15 +14,22 @@ class CategoriesMenu extends Component{
   }
   renderlevel = item => {
     let isLevelOpen = this.state[item.name] === true;
+    let iconLevel = cs({
+      fa: true,
+      'fa-chevron-up': isLevelOpen,
+      'fa-chevron-down': !isLevelOpen
+    });
 
     return (
       <div key={item.name}>
         <div onClick={this.handleItemMenu.bind(this, item.name)}>
-          {/*<i className={`fa fa-arrow-${isLevelOpen ? 'up' : 'down'}`}></i>*/}
-          {`${item.name}`}
+          {this.hasItemChildren(item) ? <i className={iconLevel} style={{marginRight: 5}}></i> : null}
+          {item.name}
         </div>
-        <Collapse id={item.name} isOpened={isLevelOpen} hasNestedCollapse={true} >
+        <Collapse id={item.name} isOpened={isLevelOpen} hasNestedCollapse={true}>
+          <div style={{marginLeft: 25}}>
           {this.hasItemChildren(item) ? item.sublevels.map(level => this.renderlevel(level)) : null}
+          </div>
         </Collapse>
       </div>
     )
@@ -34,13 +42,16 @@ class CategoriesMenu extends Component{
     let { data } = this.props;
     return (
       <div className="category-menu">
-        {data.map((category,i) => {
-          return (
-            <div key={i} style={{borderBottom: '1px solid grey'}}>
-              {this.renderlevel(category)}
-            </div>
-          )
-        })}
+        <div className="category-menu__title">Categories</div>
+        <div className="category-menu__body">
+          {data.map((category,i) => {
+            return (
+              <div key={i}>
+                {this.renderlevel(category)}
+              </div>
+            )
+          })}
+        </div>
       </div>
     );
   };

@@ -13,7 +13,7 @@ const ProductItem = ({ data }) => {
           </Card.Text>
         </Card.Body>
         <Card.Footer>
-          <div>{price}</div>
+          <div className="product-item__price">{price}</div>
           <div>
             <Button
               variant="primary"

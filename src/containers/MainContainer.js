@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import Container from 'react-bootstrap/Container';
+import React, { Component, Fragment } from 'react';
 import MainMenu from '../components/MainMenu';
 import Footer from '../components/Footer';
 
@@ -11,13 +10,13 @@ class MainContainer extends Component{
 
   render(){
     return (
-      <Container>
+      <Fragment>
         <MainMenu />
         <div className="main-container">
           {this.props.children}
         </div>
         <Footer />
-      </Container>
+      </Fragment>
     );
   };
 };

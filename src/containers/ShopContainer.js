@@ -65,11 +65,11 @@ class ShopContainer extends Component{
     return (
       <Container>
         <Row>
-          <Col xs={4} md={3}>
+          <Col xs={5} sm={4} md={3}>
               {this.renderCategories()}
               <ProductFilter handleFilter={this.handleFilter}/>
           </Col>
-          <Col xs={8} md={9}>
+          <Col xs={7} sm={8} md={9}>
             <ProductOrder handleOrder={this.handleOrder}/>
             {this.renderProductList()}
           </Col>

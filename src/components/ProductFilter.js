@@ -42,52 +42,54 @@ class ProductFilter extends Component{
     return (
       <Form className="product-filter">
         <div className="product-filter__title">Filter options</div>
-        <Form.Group>
-          <Form.Label>Availability</Form.Label>
-          <Form.Control name="available" as="select" value={available} onChange={this.handleChangeInput} >
-            {OPTIONS_FILTER_AVAILABLE.map(option => {
-              return (
-                <option key={option.value} value={option.value}>{option.name}</option>
-              )
-            })}
-          </Form.Control>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Stock:</Form.Label>
-          <Form.Control
-            name="stock"
-            type="number"
-            value={stock || ''}
-            onChange={this.handleChangeInput}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Min. price:</Form.Label>
-          <Form.Control
-            name="min_price"
-            type="number"
-            value={min_price || ''}
-            onChange={this.handleChangeInput}
-          />
-          <Form.Label>Max. price:</Form.Label>
-          <Form.Control
-            name="max_price"
-            type="number"
-            value={max_price || ''}
-            onChange={this.handleChangeInput}
-          />
-        </Form.Group>
-        <div className="filter-buttons">
-          <Button
-            variant="primary"
-            onClick={this.handleClickButtonFilter.bind(this)}>
-            Filter
-          </Button>
-          <Button
-            variant="light"
-            onClick={this.handleClickButtonResetFilter.bind(this)}>
-            Reset Filter
-          </Button>
+        <div className="product-filter__body">
+          <Form.Group>
+            <Form.Label>Availability</Form.Label>
+            <Form.Control name="available" as="select" value={available} onChange={this.handleChangeInput} >
+              {OPTIONS_FILTER_AVAILABLE.map(option => {
+                return (
+                  <option key={option.value} value={option.value}>{option.name}</option>
+                )
+              })}
+            </Form.Control>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Stock:</Form.Label>
+            <Form.Control
+              name="stock"
+              type="number"
+              value={stock || ''}
+              onChange={this.handleChangeInput}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Min. price:</Form.Label>
+            <Form.Control
+              name="min_price"
+              type="number"
+              value={min_price || ''}
+              onChange={this.handleChangeInput}
+            />
+            <Form.Label>Max. price:</Form.Label>
+            <Form.Control
+              name="max_price"
+              type="number"
+              value={max_price || ''}
+              onChange={this.handleChangeInput}
+            />
+          </Form.Group>
+          <div className="filter-buttons">
+            <Button
+              variant="primary"
+              onClick={this.handleClickButtonFilter.bind(this)}>
+              Filter
+            </Button>
+            <Button
+              variant="light"
+              onClick={this.handleClickButtonResetFilter.bind(this)}>
+              Reset Filter
+            </Button>
+          </div>
         </div>
       </Form>
     );
