@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionsCreatorProducts from '../reducers/ProductsReducer';
@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 import CategoriesMenu from '../components/CategoriesMenu';
 import ProductList from '../components/ProductList';
 import ProductFilter from '../components/ProductFilter';
+import ProductOrder from '../components/ProductOrder';
 import Spinner from 'react-bootstrap/Spinner';
 
 
@@ -25,23 +26,52 @@ class ShopContainer extends Component{
     ev.preventDefault();
     this.props.productActions.getProductsFiltered(filters);
   }
-  render(){
-    let { products, categories } = this.props;
+  handleOrder = (name) => {
+    this.props.productActions.getProductsOrdered(name);
+  }
+  renderCategories = () => {
+    let { categories, is_loading } = this.props.categories;
 
+    if(is_loading){
+      return(
+        <div className="spinner--wrapper">
+          <Spinner animation="grow" />
+        </div>
+      )
+    }
+    return (
+      <Fragment>
+        <CategoriesMenu data={categories}/>
+      </Fragment>
+    )
+  }
+  renderProductList = () => {
+    let { products, is_loading } = this.props.products;
+
+    if(is_loading){
+      return(
+        <div className="spinner--wrapper">
+          <Spinner animation="grow" />
+        </div>
+      )
+    }
+    return (
+      <Fragment>
+        <ProductList data={products}/>
+      </Fragment>
+    )
+  }
+  render(){
     return (
       <Container>
         <Row>
-          <Col xs={4} md={2}>
-            {categories.is_loading
-              ? <Spinner animation="grow" />
-              : <CategoriesMenu data={categories.categories}/>}
+          <Col xs={4} md={3}>
+              {this.renderCategories()}
               <ProductFilter handleFilter={this.handleFilter}/>
           </Col>
-          <Col xs={8} md={10}>
-            <h1>Products</h1>
-            {products.is_loading
-              ? <Spinner animation="grow" />
-              : <ProductList data={products.products}/>}
+          <Col xs={8} md={9}>
+            <ProductOrder handleOrder={this.handleOrder}/>
+            {this.renderProductList()}
           </Col>
         </Row>
       </Container>
