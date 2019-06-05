@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { OPTIONS_FILTER_AVAILABLE } from '../constants'
+import { OPTIONS_FILTER_AVAILABLE } from '../constants';
+
+const INITIAL_STATE = {
+  available: 0,
+  stock: undefined,
+  min_price: undefined,
+  max_price: undefined
+}
 
 class ProductFilter extends Component{
   constructor(props) {
    super(props);
    this.state = {
-     available: 0,
-     stock: undefined,
-     min_price: undefined,
-     max_price: undefined
+     ...INITIAL_STATE
    }
   }
   handleChangeInput = ev => {
@@ -22,7 +26,16 @@ class ProductFilter extends Component{
     });
   }
   handleClickButtonFilter = ev => {
+    ev.preventDefault();
     this.props.handleFilter(ev, this.state);
+  }
+  handleClickButtonResetFilter = ev => {
+    ev.persist();
+    this.setState({
+      ...INITIAL_STATE
+    }, () => {
+      this.props.handleFilter(ev, this.state);
+    });
   }
   render(){
     let { available, stock, min_price, max_price } = this.state;
@@ -64,11 +77,18 @@ class ProductFilter extends Component{
             onChange={this.handleChangeInput}
           />
         </Form.Group>
-        <Button
-          variant="primary"
-          onClick={this.handleClickButtonFilter.bind(this)}>
-          Filter
-        </Button>
+        <div className="filter-buttons">
+          <Button
+            variant="primary"
+            onClick={this.handleClickButtonFilter.bind(this)}>
+            Filter
+          </Button>
+          <Button
+            variant="light"
+            onClick={this.handleClickButtonResetFilter.bind(this)}>
+            Reset Filter
+          </Button>
+        </div>
       </Form>
     );
   };
