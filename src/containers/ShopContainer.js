@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import CategoriesMenu from '../components/CategoriesMenu';
 import ProductList from '../components/ProductList';
+import ProductFilter from '../components/ProductFilter';
 import Spinner from 'react-bootstrap/Spinner';
 
 
@@ -17,8 +18,12 @@ class ShopContainer extends Component{
    this.state = {}
   }
   componentDidMount() {
-    this.props.productActions.fetchProducts();
+    this.props.productActions.getProducts();
     this.props.categoriesActions.fetchCategories();
+  }
+  handleFilter = (ev, filters) => {
+    ev.preventDefault();
+    this.props.productActions.getProductsFiltered(filters);
   }
   render(){
     let { products, categories } = this.props;
@@ -30,6 +35,7 @@ class ShopContainer extends Component{
             {categories.is_loading
               ? <Spinner animation="grow" />
               : <CategoriesMenu data={categories.categories}/>}
+              <ProductFilter handleFilter={this.handleFilter}/>
           </Col>
           <Col xs={8} md={10}>
             <h1>Products</h1>
