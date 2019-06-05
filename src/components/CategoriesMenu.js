@@ -34,7 +34,7 @@ class CategoriesMenu extends Component{
     let { data } = this.props;
     return (
       <div className="category-menu">
-        {this.props.data.map((category,i) => {
+        {data.map((category,i) => {
           return (
             <div key={i} style={{borderBottom: '1px solid grey'}}>
               {this.renderlevel(category)}
