@@ -31,5 +31,22 @@
 }
 .card--disabled {
   background: #f0efef61;
-  opacity: 0.7;  
+  opacity: 0.7;
+}
+.product-filter {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  padding: 15px 15px;
+}
+.product-filter__title {
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: bold;
 }
