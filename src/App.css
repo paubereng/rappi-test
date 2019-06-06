@@ -139,3 +139,29 @@ ul {
     margin-bottom: 10px;
   }
 }
+.cart-list {
+  position: relative;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  padding: 20px;
+}
+.cart-item {
+  border-bottom: 1px solid #dedede;
+  margin-bottom: 15px;
+}
+.cart-item:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+.cart-item__quantity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cart-item__quantity input {
+  margin: 0 10px;
+  width: 50px;
+}
