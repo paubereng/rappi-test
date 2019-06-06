@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import CartList from '../components/CartList';
+import CartCheckout from '../components/CartCheckout';
 
 class CartContainer extends Component{
   handleRemoveProductToCart = (product) => {
@@ -22,17 +23,20 @@ class CartContainer extends Component{
 
     return (
       <Container>
-        <Row>
-          <Col>
-            <h1>My cart</h1>
-            <CartList
-              data={cart}
-              handleRemoveProductToCart={this.handleRemoveProductToCart}
-              handleAddProductToCart={this.handleAddProductToCart}
-              handleRemoveProductItemToCart={this.handleRemoveProductItemToCart}
-            />
-          </Col>
-        </Row>
+        <h1>My cart</h1>
+          <Row>
+            <Col md={9}>
+              <CartList
+                data={cart}
+                handleRemoveProductToCart={this.handleRemoveProductToCart}
+                handleAddProductToCart={this.handleAddProductToCart}
+                handleRemoveProductItemToCart={this.handleRemoveProductItemToCart}
+              />
+            </Col>
+            <Col md={3}>
+              <CartCheckout data={cart}/>
+            </Col>
+          </Row>
       </Container>
     );
   };
