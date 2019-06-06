@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionsCreatorProducts from '../reducers/ProductsReducer';
 import * as actionsCreatorsCategories from '../reducers/CategoriesReducer';
+import * as actionsCreatorsCart from '../reducers/CartReducer';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -28,6 +29,9 @@ class ShopContainer extends Component{
   }
   handleOrder = (name) => {
     this.props.productActions.getProductsOrdered(name);
+  }
+  handleAddProduct = (product) => {
+    this.props.cartActions.addProductToCart(product);
   }
   renderCategories = () => {
     let { categories, is_loading } = this.props.categories;
@@ -57,7 +61,10 @@ class ShopContainer extends Component{
     }
     return (
       <Fragment>
-        <ProductList data={products}/>
+        <ProductList
+          data={products}
+          handleAddProduct={this.handleAddProduct}
+        />
       </Fragment>
     )
   }
@@ -89,7 +96,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     productActions: bindActionCreators(actionsCreatorProducts, dispatch),
-    categoriesActions: bindActionCreators(actionsCreatorsCategories, dispatch)
+    categoriesActions: bindActionCreators(actionsCreatorsCategories, dispatch),
+    cartActions: bindActionCreators(actionsCreatorsCart, dispatch)
   }
 }
 
