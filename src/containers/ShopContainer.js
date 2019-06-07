@@ -11,21 +11,23 @@ import CategoriesMenu from '../components/CategoriesMenu';
 import ProductList from '../components/ProductList';
 import ProductFilter from '../components/ProductFilter';
 import ProductOrder from '../components/ProductOrder';
+import SearchBar from '../components/SearchBar';
 import Spinner from 'react-bootstrap/Spinner';
 
 
 class ShopContainer extends Component{
   constructor(props) {
    super(props);
-   this.state = {}
-  }
-  componentDidMount() {
-    this.props.productActions.getProducts();
-    this.props.categoriesActions.fetchCategories();
+   this.state = {
+     last_level: false
+   }
   }
   handleFilter = (ev, filters) => {
     ev.preventDefault();
     this.props.productActions.getProductsFiltered(filters);
+  }
+  handleResetFilter = (ev) => {
+    this.props.productActions.resetProductsFiltered();
   }
   handleOrder = (name) => {
     this.props.productActions.getProductsOrdered(name);
@@ -33,6 +35,18 @@ class ShopContainer extends Component{
   handleAddProduct = (product) => {
     this.props.cartActions.addProductToCart(product);
   }
+  handleClickCategory = (category) => {
+    this.props.productActions.getProductsFilteredByCategory(category.id);
+    let isLastLevel = category.hasOwnProperty('sublevels');
+
+    this.setState({
+      last_level: !isLastLevel
+    });
+  }
+  handleSearchProduct = (termSearch) => {
+    this.props.productActions.getProductsSearched(termSearch);
+  }
+
   renderCategories = () => {
     let { categories, is_loading } = this.props.categories;
 
@@ -45,12 +59,13 @@ class ShopContainer extends Component{
     }
     return (
       <Fragment>
-        <CategoriesMenu data={categories}/>
+        <CategoriesMenu data={categories} handleClickCategory={this.handleClickCategory}/>
       </Fragment>
     )
   }
   renderProductList = () => {
     let { products, is_loading } = this.props.products;
+    let { last_level } = this.state;
 
     if(is_loading){
       return(
@@ -61,6 +76,7 @@ class ShopContainer extends Component{
     }
     return (
       <Fragment>
+        {last_level && <SearchBar handleSearchProduct={this.handleSearchProduct}/>}
         <ProductList
           data={products}
           handleAddProduct={this.handleAddProduct}
@@ -70,13 +86,16 @@ class ShopContainer extends Component{
   }
   render(){
     return (
-      <Container>
+      <Container className="shop-container">
         <Row>
-          <Col xs={5} sm={4} md={3}>
+          <Col xs={5} sm={4} md={3} className="col-category-filter">
               {this.renderCategories()}
-              <ProductFilter handleFilter={this.handleFilter}/>
+              <ProductFilter
+                handleFilter={this.handleFilter}
+                handleResetFilter={this.handleResetFilter}
+              />
           </Col>
-          <Col xs={7} sm={8} md={9}>
+          <Col xs={7} sm={8} md={9} className="col-products">
             <ProductOrder handleOrder={this.handleOrder}/>
             {this.renderProductList()}
           </Col>

@@ -7,30 +7,43 @@ class CategoriesMenu extends Component{
    super(props);
    this.state = {}
   }
-  handleItemMenu = (name) => {
+  handleCollapseItemMenu = (name, ev) => {
+    ev.preventDefault();
     this.setState(prevState => ({
       [name]: !prevState[name]
     }));
   }
+  handleClickItemMenu = (category, ev) => {
+    ev.preventDefault();
+    this.props.handleClickCategory(category);
+  }
   renderlevel = item => {
     let isLevelOpen = this.state[item.name] === true;
     let iconLevel = cs({
-      fa: true,
+      'collapse-icon fa': true,
       'fa-chevron-up': isLevelOpen,
       'fa-chevron-down': !isLevelOpen
     });
 
     return (
       <div key={item.name}>
-        <div onClick={this.handleItemMenu.bind(this, item.name)}>
-          {this.hasItemChildren(item) ? <i className={iconLevel} style={{marginRight: 5}}></i> : null}
-          {item.name}
+        <div>
+          {this.hasItemChildren(item) ?
+            <i className={iconLevel}
+              onClick={this.handleCollapseItemMenu.bind(this, item.name)}>
+            </i>
+            : null
+          }
+          <span className="menu-category__item" onClick={this.handleClickItemMenu.bind(this, item)}>{item.name}</span>
         </div>
-        <Collapse id={item.name} isOpened={isLevelOpen} hasNestedCollapse={true}>
-          <div style={{marginLeft: 25}}>
-          {this.hasItemChildren(item) ? item.sublevels.map(level => this.renderlevel(level)) : null}
-          </div>
-        </Collapse>
+        {this.hasItemChildren(item) ?
+          (<Collapse id={item.name} isOpened={isLevelOpen} hasNestedCollapse={true}>
+            <div className="menu-category__children">
+            {item.sublevels.map(level => this.renderlevel(level))}
+            </div>
+          </Collapse>)
+          : null
+        }
       </div>
     )
   }
@@ -46,7 +59,7 @@ class CategoriesMenu extends Component{
         <div className="category-menu__body">
           {data.map((category,i) => {
             return (
-              <div key={i}>
+              <div key={category.id}>
                 {this.renderlevel(category)}
               </div>
             )
