@@ -1,12 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actionsCreatorProducts from '../reducers/ProductsReducer';
+import * as actionsCreatorsCategories from '../reducers/CategoriesReducer';
 import MainMenu from '../components/MainMenu';
 import Footer from '../components/Footer';
 
 class MainContainer extends Component{
-  constructor(props) {
-   super(props);
-   this.state = {}
+  componentDidMount() {
+    this.props.productActions.getProducts();
+    this.props.categoriesActions.fetchCategories();
   }
 
   render(){
@@ -30,4 +33,11 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(MainContainer);
+function mapDispatchToProps(dispatch) {
+  return {
+    productActions: bindActionCreators(actionsCreatorProducts, dispatch),
+    categoriesActions: bindActionCreators(actionsCreatorsCategories, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

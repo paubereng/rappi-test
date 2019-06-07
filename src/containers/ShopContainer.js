@@ -22,10 +22,6 @@ class ShopContainer extends Component{
      last_level: false
    }
   }
-  componentDidMount() {
-    this.props.productActions.getProducts();
-    this.props.categoriesActions.fetchCategories();
-  }
   handleFilter = (ev, filters) => {
     ev.preventDefault();
     this.props.productActions.getProductsFiltered(filters);
