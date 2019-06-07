@@ -17,7 +17,7 @@ const handleButtonDeleteProductItem = (data, handleRemoveProductItemToCartItem, 
   handleRemoveProductItemToCartItem(data);
 }
 const CartItem = ({ data, handleRemoveProductToCartItem, handleAddProductToCartItem, handleRemoveProductItemToCartItem }) => {
-    let { name, id, available, price, quantity, cart_quantity } = data;
+    let { name, price, quantity, cart_quantity, image } = data;
     let strToIntPrice = parseFloat(price.slice(1).replace(/,/g, "."));
     let totalPrice = strToIntPrice * cart_quantity;
 
@@ -25,9 +25,11 @@ const CartItem = ({ data, handleRemoveProductToCartItem, handleAddProductToCartI
       <li className="cart-item">
         <Row>
           <Col xs={3} sm={3} md={3} className="align-self-center text-center">
-            <div style={{display: 'flex', flexDirection: 'column'}}>
+            <div className="cart-item__product-info">
+              <div>
+                <img className="cart-item__image" src={image} alt="product" />
+              </div>
               <div>{name}</div>
-              <div>In stock</div>
               <div>
                 <Button
                   variant="link"

@@ -3,22 +3,18 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 class ProductItem extends PureComponent {
-  constructor(props) {
-   super(props);
-  }
   handleButtonAddProduct = (ev) => {
     ev.preventDefault();
     this.props.handleAddProductItem(this.props.data);
   }
   render (){
-    let { name, id, available, price, quantity } = this.props.data;
+    let { name, available, price, image } = this.props.data;
     return (
       <li className="product-item">
         <Card className={!available ? 'card--disabled' : null}>
+        <Card.Img variant="top" src={image} alt="product" className="product-item__image" />
           <Card.Body>
             <Card.Title>{name}</Card.Title>
-            <Card.Text>
-            </Card.Text>
           </Card.Body>
           <Card.Footer>
             <div className="product-item__price">{price}</div>

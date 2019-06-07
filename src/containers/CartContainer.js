@@ -49,7 +49,7 @@ class CartContainer extends Component{
     return (
       <Container>
         <h1>My cart</h1>
-          <Row>
+          <Row className="mt-30">
             {this.renderCartContent()}
           </Row>
       </Container>
