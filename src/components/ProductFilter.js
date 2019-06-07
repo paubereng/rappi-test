@@ -34,7 +34,7 @@ class ProductFilter extends Component{
     this.setState({
       ...INITIAL_STATE
     }, () => {
-      this.props.handleFilter(ev, this.state);
+      this.props.handleResetFilter(ev, this.state);
     });
   }
   render(){

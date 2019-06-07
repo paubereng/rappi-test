@@ -3,7 +3,10 @@ import productsJSON from '../json/products.json';
 // ACTIONS
 const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
 const FILTER_PRODUCTS = 'FILTER_PRODUCTS';
+const RESET_FILTER_PRODUCTS = 'RESET_FILTER_PRODUCTS';
 const ORDER_PRODUCTS = 'ORDER_PRODUCTS';
+const FILTER_BY_CATEGORY_PRODUCTS = 'FILTER_BY_CATEGORY_PRODUCTS';
+const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS';
 const IS_LOADING_PRODUCTS = 'IS_LOADING_PRODUCTS';
 
 // INITIAL STATE
@@ -19,7 +22,13 @@ export default function(state=initialState, action) {
       return Object.assign({}, state, { products: action.data });
     case FILTER_PRODUCTS:
       return Object.assign({}, state, { products: action.data });
+    case RESET_FILTER_PRODUCTS:
+      return Object.assign({}, state, { products: action.data });
     case ORDER_PRODUCTS:
+      return Object.assign({}, state, { products: action.data });
+    case FILTER_BY_CATEGORY_PRODUCTS:
+      return Object.assign({}, state, { products: action.data });
+    case SEARCH_PRODUCTS:
       return Object.assign({}, state, { products: action.data });
     case IS_LOADING_PRODUCTS:
       return Object.assign({}, state, { is_loading: action.data });
@@ -149,6 +158,52 @@ export function getProductsFiltered(filters) {
       dispatch({
         type: FILTER_PRODUCTS,
         data: result
+      });
+      dispatch(isLoading(false));
+    }, 1000);
+  }
+}
+
+export function resetProductsFiltered() {
+  return (dispatch) => {
+    dispatch(isLoading(true));
+    setTimeout(() => {
+      let result = fetchProducts();
+      dispatch({
+        type: RESET_FILTER_PRODUCTS,
+        data: result
+      });
+      dispatch(isLoading(false));
+    }, 1000);
+  }
+}
+
+export function getProductsFilteredByCategory(categoryId) {
+  return (dispatch) => {
+    dispatch(isLoading(true));
+    setTimeout(() => {
+      let result = fetchProducts();
+      let productsFiltered = result.filter(product => product.sublevel_id === categoryId);
+      dispatch({
+        type: FILTER_BY_CATEGORY_PRODUCTS,
+        data: productsFiltered
+      });
+      dispatch(isLoading(false));
+    }, 1000);
+  }
+}
+
+export function getProductsSearched(termSearch) {
+  return (dispatch, getState) => {
+    dispatch(isLoading(true));
+    setTimeout(() => {
+      let { products } = getState().products;
+      let productsSearched = products.filter(product => {
+        return product.name.toLowerCase().search(termSearch.toLowerCase()) !== -1;
+      });
+      dispatch({
+        type: SEARCH_PRODUCTS,
+        data: productsSearched
       });
       dispatch(isLoading(false));
     }, 1000);
