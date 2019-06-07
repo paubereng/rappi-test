@@ -67,7 +67,7 @@ const CartItem = ({ data, handleRemoveProductToCartItem, handleAddProductToCartI
             </div>
           </Col>
           <Col xs={3} sm={3} md={3} className="align-self-center text-center">
-            {`$${totalPrice}`}
+            {`$${totalPrice.toFixed(3)}`}
           </Col>
         </Row>
       </li>
