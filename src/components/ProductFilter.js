@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { OPTIONS_FILTER_AVAILABLE } from '../constants';
@@ -16,6 +17,15 @@ class ProductFilter extends Component{
    this.state = {
      ...INITIAL_STATE
    }
+  }
+  componentDidMount() {
+    let { filters } = this.props.products;
+    let keys = Object.keys(filters);
+    for (let index in keys) {
+      if(filters[keys[index]] !== this.state[keys[index]]){
+        this.setState({ [keys[index]]: filters[keys[index]] });
+      }
+    }
   }
   handleChangeInput = ev => {
     let name = ev.target.name;
@@ -96,4 +106,10 @@ class ProductFilter extends Component{
   };
 };
 
-export default ProductFilter;
+function mapStateToProps(state) {
+  return {
+    products: state.products
+  };
+}
+
+export default connect(mapStateToProps)(ProductFilter);
