@@ -8,6 +8,8 @@
 .product-item .card-body {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 .product-item__image {
   align-self: center;
@@ -41,4 +43,13 @@
   .product-item .card-footer > .product-item__price {
     margin-bottom: 10px;
   }
+}
+.product-item__available {
+  font-size: 16px;
+}
+.product-item__available--in {
+  color: #27ae60;
+}
+.product-item__available--out {
+  color: #c0392b;
 }
