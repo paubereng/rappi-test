@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Collapse } from 'react-collapse';
 import cs from 'classnames';
 
@@ -68,6 +69,11 @@ class CategoriesMenu extends Component{
       </div>
     );
   };
+};
+
+CategoriesMenu.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object),
+  handleClickCategory: PropTypes.func.isRequired
 };
 
 export default CategoriesMenu;

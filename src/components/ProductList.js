@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ProductItem from './ProductItem';
 import Alert from 'react-bootstrap/Alert';
 
@@ -23,6 +24,11 @@ const ProductList = ({ data, handleAddProduct }) => {
       })}
     </ul>
   );
+};
+
+ProductList.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object),
+  handleAddProduct: PropTypes.func.isRequired
 };
 
 export default ProductList;

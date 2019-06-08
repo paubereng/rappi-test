@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CartItem from './CartItem';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -35,6 +36,13 @@ const CartList = ({ data, handleRemoveProductToCart, handleAddProductToCart, han
       </ul>
     </div>
   );
+};
+
+CartList.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object),
+  handleRemoveProductToCart: PropTypes.func.isRequired,
+  handleAddProductToCart: PropTypes.func.isRequired,
+  handleRemoveProductItemToCart: PropTypes.func.isRequired
 };
 
 export default CartList;

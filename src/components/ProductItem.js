@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
@@ -31,6 +32,16 @@ class ProductItem extends PureComponent {
       </li>
     );
   }
+};
+
+ProductItem.propTypes = {
+  data: PropTypes.shape({
+    name: PropTypes.string,
+    price: PropTypes.string,
+    available: PropTypes.bool,
+    image: PropTypes.string
+  }),
+  handleAddProductItem: PropTypes.func.isRequired
 };
 
 export default ProductItem;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 
 const CartCheckout = ({ data }) => {
@@ -31,6 +32,10 @@ const CartCheckout = ({ data }) => {
       </div>
     </div>
   );
+};
+
+CartCheckout.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default CartCheckout;

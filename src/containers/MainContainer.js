@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionsCreatorProducts from '../reducers/ProductsReducer';
@@ -25,6 +26,10 @@ class MainContainer extends Component{
       </Fragment>
     );
   };
+};
+
+MainContainer.propTypes = {
+  children: PropTypes.element
 };
 
 function mapStateToProps(state) {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { OPTIONS_FILTER_AVAILABLE } from '../constants';
@@ -104,6 +105,12 @@ class ProductFilter extends Component{
       </Form>
     );
   };
+};
+
+ProductFilter.propTypes = {
+  products: PropTypes.object,
+  handleFilter: PropTypes.func.isRequired,
+  handleResetFilter: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {

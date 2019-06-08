@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -74,6 +75,19 @@ const CartItem = ({ data, handleRemoveProductToCartItem, handleAddProductToCartI
         </Row>
       </li>
     );
+};
+
+CartItem.propTypes = {
+  data: PropTypes.shape({
+    name: PropTypes.string,
+    price: PropTypes.string,
+    quantity: PropTypes.number,
+    cart_quantity: PropTypes.number,
+    image: PropTypes.string
+  }),
+  handleRemoveProductToCartItem: PropTypes.func.isRequired,
+  handleAddProductToCartItem: PropTypes.func.isRequired,
+  handleRemoveProductItemToCartItem: PropTypes.func.isRequired
 };
 
 export default CartItem;

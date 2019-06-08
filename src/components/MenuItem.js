@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 const  MenuItem = (props) => {
@@ -10,5 +11,9 @@ const  MenuItem = (props) => {
       />
   );
 }
+
+MenuItem.propTypes = {
+  router: PropTypes.object
+};
 
 export default MenuItem;

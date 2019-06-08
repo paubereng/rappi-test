@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionsCreators from '../reducers/CartReducer';
@@ -57,6 +58,10 @@ class CartContainer extends Component{
       </Container>
     );
   };
+};
+
+CartContainer.propTypes = {
+  cart: PropTypes.object
 };
 
 function mapStateToProps(state) {

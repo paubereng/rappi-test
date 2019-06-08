@@ -1,4 +1,5 @@
 import React, { PureComponent  } from 'react';
+import PropTypes from 'prop-types';
 import cs from 'classnames';
 
 const INITIAL_STATE = {
@@ -43,6 +44,10 @@ class ProductOrder extends PureComponent {
       </div>
     );
   };
+};
+
+ProductOrder.propTypes = {
+  handleOrder: PropTypes.func.isRequired
 };
 
 export default ProductOrder;

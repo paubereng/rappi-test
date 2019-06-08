@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
@@ -42,5 +43,9 @@ class SearchBar extends Component{
     );
   }
 }
+
+SearchBar.propTypes = {
+  handleSearchProduct: PropTypes.func.isRequired
+};
 
 export default SearchBar;
