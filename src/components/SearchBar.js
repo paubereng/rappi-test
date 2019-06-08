@@ -23,7 +23,6 @@ class SearchBar extends Component{
   }
   render(){
     let { term_search } = this.state;
-    let hasButtonDisabled = term_search === "" ? true : false;
     return(
       <InputGroup className="search-bar">
         <FormControl
@@ -34,7 +33,6 @@ class SearchBar extends Component{
         />
         <InputGroup.Append>
           <Button
-            disabled={hasButtonDisabled}
             onClick={this.handleClickButton.bind(this)}
             variant="outline-secondary">
             Search

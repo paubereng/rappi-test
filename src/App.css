@@ -112,13 +112,19 @@ ul {
 .filter-buttons button:first-child {
   margin-bottom: 10px;
 }
-.spinner--wrapper {
+.spinner-wrapper {
   margin-top: 50px;
   text-align: center;
 }
-.message--wrapper {
-  margin: 150px;
+.message-wrapper {
+  margin: 50px 10px 0;
   text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.message-wrapper .alert {
+  min-width: 80px;
+  width: 300px;
 }
 @media (min-width: 768px) {
   .product-item {
@@ -228,9 +234,8 @@ ul {
 .product-item__image {
   align-self: center;
   width: 100%;
-  height: 100%;
+  height: 220px;
   max-width: 220px;
-  max-height: 220px;
 }
 .cart-item__product-info {
   display: flex;;
@@ -253,4 +258,7 @@ ul {
   .collapse-icon {
       margin-right: 1px;
   }
+}
+.product-list__category-selected {
+  margin-bottom: 10px;
 }

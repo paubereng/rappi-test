@@ -24,9 +24,11 @@ class CartContainer extends Component{
 
     if(!cart || !cart.length > 0) {
       return (
-        <div className="message--wrapper">
-          <Alert variant="dark">Cart is empty</Alert>
-        </div>
+        <Col>
+          <div className="message-wrapper">
+            <Alert variant="dark">Cart is empty</Alert>
+          </div>
+        </Col>
       )
     }
     return (

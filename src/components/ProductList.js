@@ -5,7 +5,7 @@ import Alert from 'react-bootstrap/Alert';
 const ProductList = ({ data, handleAddProduct }) => {
   if(!data || !data.length > 0) {
     return (
-      <div className="message--wrapper">
+      <div className="message-wrapper">
         <Alert variant="dark">Not Found</Alert>
       </div>
     )
