@@ -27,14 +27,14 @@ class CategoriesMenu extends Component{
 
     return (
       <div key={item.name}>
-        <div>
+        <div className="menu-category__item">
           {this.hasItemChildren(item) ?
             <i className={iconLevel}
               onClick={this.handleCollapseItemMenu.bind(this, item.name)}>
             </i>
             : null
           }
-          <span className="menu-category__item" onClick={this.handleClickItemMenu.bind(this, item)}>{item.name}</span>
+          <span className="menu-category__title" onClick={this.handleClickItemMenu.bind(this, item)}>{item.name}</span>
         </div>
         {this.hasItemChildren(item) ?
           (<Collapse id={item.name} isOpened={isLevelOpen} hasNestedCollapse={true}>
