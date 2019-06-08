@@ -24,7 +24,8 @@ class ShopContainer extends Component{
   }
   handleFilter = (ev, filters) => {
     ev.preventDefault();
-    this.props.productActions.getProductsFiltered(filters);
+    let { id } = this.props.products.categories;
+    this.props.productActions.getProductsFiltered(filters, id);
   }
   handleResetFilter = (ev) => {
     this.props.productActions.resetProductsFiltered();
@@ -36,7 +37,8 @@ class ShopContainer extends Component{
     this.props.cartActions.addProductToCart(product);
   }
   handleClickCategory = (category) => {
-    this.props.productActions.getProductsFilteredByCategory(category.id);
+    let { filters } = this.props.products;
+    this.props.productActions.getProductsFiltered(filters, category);
     let isLastLevel = category.hasOwnProperty('sublevels');
 
     this.setState({
@@ -52,7 +54,7 @@ class ShopContainer extends Component{
 
     if(is_loading){
       return(
-        <div className="spinner--wrapper">
+        <div className="spinner-wrapper">
           <Spinner animation="grow" />
         </div>
       )
@@ -65,18 +67,20 @@ class ShopContainer extends Component{
   }
   renderProductList = () => {
     let { products, is_loading } = this.props.products;
-    let { last_level } = this.state;
+    let { name, sublevels } = this.props.products.categories;
+    let lastLevel = (name && (!sublevels || sublevels.length === 0)) ? true : false;
 
     if(is_loading){
       return(
-        <div className="spinner--wrapper">
+        <div className="spinner-wrapper">
           <Spinner animation="grow" />
         </div>
       )
     }
     return (
       <Fragment>
-        {last_level && <SearchBar handleSearchProduct={this.handleSearchProduct}/>}
+        <div className="product-list__category-selected">Category: <b>{name ? name : 'All'}</b></div>
+        {lastLevel && <SearchBar handleSearchProduct={this.handleSearchProduct}/>}
         <ProductList
           data={products}
           handleAddProduct={this.handleAddProduct}

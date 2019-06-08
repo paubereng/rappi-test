@@ -5,13 +5,14 @@ const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
 const FILTER_PRODUCTS = 'FILTER_PRODUCTS';
 const RESET_FILTER_PRODUCTS = 'RESET_FILTER_PRODUCTS';
 const ORDER_PRODUCTS = 'ORDER_PRODUCTS';
-const FILTER_BY_CATEGORY_PRODUCTS = 'FILTER_BY_CATEGORY_PRODUCTS';
 const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS';
 const IS_LOADING_PRODUCTS = 'IS_LOADING_PRODUCTS';
 
 // INITIAL STATE
 const initialState = {
   products: [],
+  filters: {},
+  categories: {},
   is_loading: false,
   has_error: false
 };
@@ -21,12 +22,14 @@ export default function(state=initialState, action) {
     case FETCH_PRODUCTS:
       return Object.assign({}, state, { products: action.data });
     case FILTER_PRODUCTS:
-      return Object.assign({}, state, { products: action.data });
+      return Object.assign({}, state, {
+        products: action.data,
+        filters: action.filters,
+        categories: { ...action.category }
+      });
     case RESET_FILTER_PRODUCTS:
       return Object.assign({}, state, { products: action.data });
     case ORDER_PRODUCTS:
-      return Object.assign({}, state, { products: action.data });
-    case FILTER_BY_CATEGORY_PRODUCTS:
       return Object.assign({}, state, { products: action.data });
     case SEARCH_PRODUCTS:
       return Object.assign({}, state, { products: action.data });
@@ -57,20 +60,19 @@ function filterProductByPrice(products, maxPrice, minPrice) {
   if((minPrice === '' || minPrice === undefined) && (maxPrice === '' || maxPrice === undefined)) {
     return products;
   }
-
   let min_price = parseFloat(parseFloat(minPrice).toFixed(2));
   let max_price = parseFloat(parseFloat(maxPrice).toFixed(2));
   let compare = 0;
 
   let productsFiltered = products.filter(product => {
     let price = parseFloat(product.price.slice(1).replace(/,/g, "."));
-    if((min_price !== '' || min_price !== undefined) && (max_price !== '' || max_price !== undefined)){
+    if((minPrice !== '' || minPrice !== undefined) && (maxPrice !== '' || maxPrice !== undefined)){
       compare = price <= max_price && price >= min_price;
     }else{
-      if(min_price !== undefined && min_price !== ''){
+      if(minPrice !== undefined && minPrice !== ''){
         compare = price >= min_price;
       }
-      if(max_price !== undefined && max_price !== '' ){
+      if(maxPrice !== undefined && maxPrice !== '' ){
         compare= price <= max_price;
       }
     }
@@ -104,8 +106,10 @@ function filterProductByAvailability(products, availability) {
   return productsFiltered;
 }
 
-function filterProducts(filters) {
-  const products = fetchProducts();
+function filterProducts(filters, products) {
+  if(!filters || Object.keys(filters).length === 0) {
+    return products;
+  }
   let { min_price, max_price, stock, available } = filters;
   let filteredProducts = [];
 
@@ -118,10 +122,7 @@ function filterProducts(filters) {
 
 function order(property){
   let sortOrder = -1;
-  // if(property[0] === "-") {
-  //     sortOrder = -1;
-  //     property = property.substr(1);
-  // }
+
   return function (a,b) {
     let result = [];
     if(property === 'price') {
@@ -150,14 +151,23 @@ export function getProductsOrdered(orderType) {
   }
 }
 
-export function getProductsFiltered(filters) {
+export function getProductsFiltered(filters, category) {
   return (dispatch) => {
     dispatch(isLoading(true));
     setTimeout(() => {
-      let result = filterProducts(filters);
+      let products = fetchProducts();
+      let result = [];
+      if(category && category.hasOwnProperty('id')){
+        let filteredByCategory = products.filter(product => product.sublevel_id === category.id);
+        result = filterProducts(filters, filteredByCategory);
+      }else {
+        result = filterProducts(filters, products);
+      }
       dispatch({
         type: FILTER_PRODUCTS,
-        data: result
+        data: result,
+        filters: filters,
+        category: category
       });
       dispatch(isLoading(false));
     }, 1000);
@@ -178,27 +188,22 @@ export function resetProductsFiltered() {
   }
 }
 
-export function getProductsFilteredByCategory(categoryId) {
-  return (dispatch) => {
-    dispatch(isLoading(true));
-    setTimeout(() => {
-      let result = fetchProducts();
-      let productsFiltered = result.filter(product => product.sublevel_id === categoryId);
-      dispatch({
-        type: FILTER_BY_CATEGORY_PRODUCTS,
-        data: productsFiltered
-      });
-      dispatch(isLoading(false));
-    }, 1000);
-  }
-}
-
 export function getProductsSearched(termSearch) {
   return (dispatch, getState) => {
     dispatch(isLoading(true));
     setTimeout(() => {
-      let { products } = getState().products;
-      let productsSearched = products.filter(product => {
+      let { filters } = getState().products;
+      let { id } = getState().products.categories;
+      let products = fetchProducts();
+      let result = [];
+      if(id){
+        let filteredByCategory = products.filter(product => product.sublevel_id === id);
+        result = filterProducts(filters, filteredByCategory);
+      }else {
+        result = filterProducts(filters, products);
+      }
+
+      let productsSearched = result.filter(product => {
         return product.name.toLowerCase().search(termSearch.toLowerCase()) !== -1;
       });
       dispatch({
