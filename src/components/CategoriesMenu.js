@@ -8,14 +8,12 @@ class CategoriesMenu extends Component{
    super(props);
    this.state = {}
   }
-  handleCollapseItemMenu = (name, ev) => {
+  handleClickItemMenu = (category, ev) => {
     ev.preventDefault();
+    let { name } = category;
     this.setState(prevState => ({
       [name]: !prevState[name]
     }));
-  }
-  handleClickItemMenu = (category, ev) => {
-    ev.preventDefault();
     this.props.handleClickCategory(category);
   }
   renderlevel = item => {
@@ -28,14 +26,12 @@ class CategoriesMenu extends Component{
 
     return (
       <div key={item.name}>
-        <div className="menu-category__item">
+        <div className="menu-category__item" onClick={this.handleClickItemMenu.bind(this, item)}>
           {this.hasItemChildren(item) ?
-            <i className={iconLevel}
-              onClick={this.handleCollapseItemMenu.bind(this, item.name)}>
-            </i>
+            <i className={iconLevel}></i>
             : null
           }
-          <span className="menu-category__title" onClick={this.handleClickItemMenu.bind(this, item)}>{item.name}</span>
+          <span className="menu-category__title">{item.name}</span>
         </div>
         {this.hasItemChildren(item) ?
           (<Collapse id={item.name} isOpened={isLevelOpen} hasNestedCollapse={true}>
