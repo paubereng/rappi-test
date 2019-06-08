@@ -28,7 +28,7 @@ class SearchBar extends Component{
       <InputGroup className="search-bar">
         <FormControl
           type="text"
-          placeholder="Search product"
+          placeholder="Search"
           value={term_search}
           onChange={this.handleChangeInput}
         />

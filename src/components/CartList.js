@@ -8,7 +8,7 @@ const CartList = ({ data, handleRemoveProductToCart, handleAddProductToCart, han
     <div className="cart-list">
       <Row>
         <Col xs={3} sm={3} md={3} className="align-self-center text-center">
-          Products
+          Product
         </Col>
         <Col xs={3} sm={3} md={3} className="align-self-center text-center">
           Price
