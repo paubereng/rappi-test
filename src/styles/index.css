@@ -1,0 +1,37 @@
+@import url("CartCheckout.css");
+@import url("CartItem.css");
+@import url("CartList.css");
+@import url("CategoriesMenu.css");
+@import url("Footer.css");
+@import url("MainMenu.css");
+@import url("Message.css");
+@import url("ProductFilter.css");
+@import url("ProductItem.css");
+@import url("ProductList.css");
+@import url("ProductOrder.css");
+@import url("SearchBar.css");
+@import url("Spinner.css");
+@import url("ShopContainer.css");
+
+body {
+  margin: 0;
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.main-container {
+  min-height: calc(100vh - 70px);
+  margin: 30px 0;
+}
+.mt-30 {
+  margin-top: 30px;
+}

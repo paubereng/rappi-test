@@ -1,0 +1,29 @@
+.cart-item {
+  border-bottom: 1px solid #dedede;
+  margin-bottom: 15px;
+}
+.cart-item:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+.cart-item__quantity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width: 992px) {
+  .cart-item__quantity {
+    flex-direction: column;
+  }
+}
+.cart-item__quantity input {
+  margin: 0 10px;
+  width: 50px;
+}
+.cart-item__product-info {
+  display: flex;;
+  flex-direction: column;
+}
+.cart-item__image {
+  width: 100%;
+}

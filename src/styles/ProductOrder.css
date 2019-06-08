@@ -1,0 +1,29 @@
+.product-order {
+  margin-bottom: 20px;
+  position: relative;
+}
+.product-order__list {
+  display: flex;
+  background-clip: border-box;
+  border: 1px solid #dedede;
+  border-right: 0;
+  border-radius: 0.25rem;
+  flex-wrap: wrap;
+}
+.product-order__item {
+    border-right: 1px solid;
+    border-top: 1px solid;
+    border-color: #dedede;
+    flex-grow: 1;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-basis: 33%;
+    padding: 10px;
+}
+.order-item--pressed {
+  background: #b6b3b3;
+  color: white;
+}

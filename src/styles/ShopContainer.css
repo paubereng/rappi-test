@@ -1,0 +1,8 @@
+@media (max-width: 576px) {
+  .shop-container .col-sm-4.col-category-filter {
+    padding-right: 5px
+  }
+  .shop-container .col-sm-8.col-products {
+    padding-left: 5px
+  }
+}

@@ -1,0 +1,21 @@
+.cart-checkout {
+  position: relative;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+.cart-checkout__title {
+  padding: 20px;
+  border-bottom: 1px solid #dedede;
+}
+.cart-checkout__item {
+  justify-content: space-between;
+  display: flex;
+  padding: 15px;
+  border-bottom: 1px solid #dedede;
+}
+.cart-checkout__checkout-btn {
+  flex: 1;
+}

@@ -1,0 +1,10 @@
+.message-wrapper {
+  margin: 50px 10px 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.message-wrapper .alert {
+  min-width: 80px;
+  width: 300px;
+}

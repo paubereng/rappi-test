@@ -1,0 +1,10 @@
+.cart-list {
+  margin-bottom: 20px;
+}
+.cart-list__list {
+  position: relative;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  padding: 5px;
+}
