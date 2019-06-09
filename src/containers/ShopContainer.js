@@ -25,8 +25,8 @@ class ShopContainer extends Component{
   }
   handleFilter = (ev, filters) => {
     ev.preventDefault();
-    let { id } = this.props.products.categories;
-    this.props.productActions.getProductsFiltered(filters, id);
+    let { categories } = this.props.products;
+    this.props.productActions.getProductsFiltered(filters, categories);
   }
   handleResetFilter = (ev) => {
     this.props.productActions.resetProductsFiltered();
