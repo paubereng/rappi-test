@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { stringPriceToNumber, replaceDot } from '../utils/utils';
 
 const handleButtonDeleteProduct = (data, handleRemoveProductToCartItem, ev) => {
   ev.preventDefault();
@@ -19,8 +20,9 @@ const handleButtonDeleteProductItem = (data, handleRemoveProductItemToCartItem, 
 }
 const CartItem = ({ data, handleRemoveProductToCartItem, handleAddProductToCartItem, handleRemoveProductItemToCartItem }) => {
     let { name, price, quantity, cart_quantity, image } = data;
-    let strToIntPrice = parseFloat(price.slice(1).replace(/,/g, "."));
+    let strToIntPrice = stringPriceToNumber(price);
     let totalPrice = strToIntPrice * cart_quantity;
+    let totalPriceWithComma = replaceDot(totalPrice);
 
     return (
       <li className="cart-item">
@@ -70,7 +72,7 @@ const CartItem = ({ data, handleRemoveProductToCartItem, handleAddProductToCartI
             </div>
           </Col>
           <Col xs={3} sm={3} md={3} className="align-self-center text-center">
-            {`$${totalPrice.toFixed(3)}`}
+            {`$${totalPriceWithComma}`}
           </Col>
         </Row>
       </li>

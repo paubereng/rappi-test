@@ -1,4 +1,5 @@
 import productsJSON from '../json/products.json';
+import { stringPriceToNumber } from '../utils/utils';
 
 // ACTIONS
 const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
@@ -61,12 +62,12 @@ function filterProductByPrice(products, maxPrice, minPrice) {
   if((minPrice === '' || minPrice === undefined) && (maxPrice === '' || maxPrice === undefined)) {
     return products;
   }
-  let min_price = parseFloat(parseFloat(minPrice).toFixed(2));
-  let max_price = parseFloat(parseFloat(maxPrice).toFixed(2));
+  let min_price = parseFloat(parseFloat(minPrice).toFixed(3));
+  let max_price = parseFloat(parseFloat(maxPrice).toFixed(3));
   let compare = 0;
 
   let productsFiltered = products.filter(product => {
-    let price = parseFloat(product.price.slice(1).replace(/,/g, "."));
+    let price = stringPriceToNumber(product.price);
     if((minPrice !== '' || minPrice !== undefined) && (maxPrice !== '' || maxPrice !== undefined)){
       compare = price <= max_price && price >= min_price;
     }else{
@@ -134,8 +135,8 @@ function orderProducts(property, sortOrder){
   return function (a,b) {
     let result = [];
     if(property === 'price') {
-      let firstNumber = parseFloat(a[property].slice(1).replace(/,/g, "."));
-      let secondNumber = parseFloat(b[property].slice(1).replace(/,/g, "."));
+      let firstNumber = stringPriceToNumber(a[property]);
+      let secondNumber = stringPriceToNumber(b[property]);
       result = (firstNumber < secondNumber) ? -1 : (firstNumber > secondNumber) ? 1 : 0;
     }else {
       result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
