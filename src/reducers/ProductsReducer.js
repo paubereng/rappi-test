@@ -121,7 +121,7 @@ function filterProducts(filters, products) {
   return filteredProducts;
 }
 
-function order(property, sortOrder){
+function orderProducts(property, sortOrder){
   let sortType = 0;
   if(sortOrder === 1) {
     sortType = -1;
@@ -149,7 +149,7 @@ export function getProductsOrdered(property, sortOrder) {
     dispatch(isLoading(true));
     setTimeout(() => {
       let productState = getState().products.products;
-      let result = productState.sort(order(property, sortOrder));
+      let result = productState.sort(orderProducts(property, sortOrder));
       let newOrder = {
         name: property,
         sort_order: sortOrder
@@ -178,7 +178,7 @@ export function getProductsFiltered(filters, category) {
         result = filterProducts(filters, products);
       }
       if(order && order.hasOwnProperty('sort_order') && order.sort_order !== 0) {
-        result = result.sort(order(order.name, order.sort_order));
+        result = result.sort(orderProducts(order.name, order.sort_order));
       }
 
       dispatch({
@@ -223,7 +223,7 @@ export function getProductsSearched(termSearch) {
       }
 
       if(order && order.hasOwnProperty('sort_order') && order.sort_order !== 0) {
-        result = result.sort(order(order.name, order.sort_order));
+        result = result.sort(orderProducts(order.name, order.sort_order));
       }
 
       let productsSearched = result.filter(product => {
