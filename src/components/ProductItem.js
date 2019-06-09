@@ -31,7 +31,7 @@ class ProductItem extends PureComponent {
             <div className="product-item__price">{price}</div>
             <div>
               <Button
-                variant="primary"
+                variant="secondary"
                 onClick={this.handleButtonAddProduct.bind(this)}
                 disabled={!available}>
                 Add to cart

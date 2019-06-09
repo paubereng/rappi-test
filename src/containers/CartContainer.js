@@ -50,7 +50,7 @@ class CartContainer extends Component{
   }
   render(){
     return (
-      <Container>
+      <Container className="page">
         <h1>My cart</h1>
           <Row className="mt-30">
             {this.renderCartContent()}

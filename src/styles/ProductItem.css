@@ -46,6 +46,7 @@
 }
 .product-item__available {
   font-size: 0.9rem;
+  font-weight: bold;
 }
 .product-item__available--in {
   color: #27ae60;

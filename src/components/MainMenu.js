@@ -8,7 +8,7 @@ import Badge from 'react-bootstrap/Badge';
 
 const  MainMenu = ({ productsNumber }) => {
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="primary" variant="dark" fixed="top">
       <Container>
         <MenuItem className="navbar-brand" to="/" exact={true}>El Baratón</MenuItem>
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">

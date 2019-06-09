@@ -56,7 +56,7 @@ class ShopContainer extends Component{
     if(is_loading){
       return(
         <div className="spinner-wrapper">
-          <Spinner animation="grow" />
+          <Spinner animation="grow" variant="primary" />
         </div>
       )
     }
@@ -74,7 +74,7 @@ class ShopContainer extends Component{
     if(is_loading){
       return(
         <div className="spinner-wrapper">
-          <Spinner animation="grow" />
+          <Spinner animation="grow" variant="primary" />
         </div>
       )
     }
@@ -92,22 +92,25 @@ class ShopContainer extends Component{
   render(){
     let { order, filters } = this.props.products;
     return (
-      <Container className="shop-container">
-        <Row>
-          <Col xs={5} sm={4} md={3} className="col-category-filter">
-              {this.renderCategories()}
-              <ProductFilter
-                handleFilter={this.handleFilter}
-                handleResetFilter={this.handleResetFilter}
-                prevFilters={filters}
-              />
-          </Col>
-          <Col xs={7} sm={8} md={9} className="col-products">
-            <ProductOrder handleOrder={this.handleOrder} prevOrder={order}/>
-            {this.renderProductList()}
-          </Col>
-        </Row>
-      </Container>
+      <Fragment>
+        <div className="banner"/>
+        <Container className="shop-container">
+          <Row>
+            <Col xs={5} sm={4} md={3} className="col-category-filter">
+                {this.renderCategories()}
+                <ProductFilter
+                  handleFilter={this.handleFilter}
+                  handleResetFilter={this.handleResetFilter}
+                  prevFilters={filters}
+                />
+            </Col>
+            <Col xs={7} sm={8} md={9} className="col-products">
+              <ProductOrder handleOrder={this.handleOrder} prevOrder={order}/>
+              {this.renderProductList()}
+            </Col>
+          </Row>
+        </Container>
+      </Fragment>
     );
   };
 };

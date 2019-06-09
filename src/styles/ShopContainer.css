@@ -6,3 +6,14 @@
     padding-left: 5px
   }
 }
+.banner {
+  background: url('/img/breakfast.jpg');
+  background-size: cover;
+  height: 200px;
+  margin-bottom: 20px;
+}
+@media (max-width: 576px) {
+  .banner {
+    height: 100px;
+  }
+}
