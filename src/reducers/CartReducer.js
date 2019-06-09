@@ -2,6 +2,7 @@
 const ADD_PRODUCT = 'ADD_PRODUCT';
 const DELETE_PRODUCT = 'DELETE_PRODUCT';
 const DELETE_ITEM_PRODUCT = 'DELETE_ITEM_PRODUCT';
+const CHECKOUT_PROCESS = 'CHECKOUT_PROCESS';
 
 // INITIAL STATE
 const initialState = {
@@ -45,6 +46,9 @@ export default function(state=initialState, action) {
       })
 
       return Object.assign({}, state, { cart: updateCart });
+    }
+    case CHECKOUT_PROCESS: {
+      return Object.assign({}, state, { ...initialState });
     }
     default:
     return state;
@@ -100,6 +104,16 @@ export function deleteItemProductToCart(product) {
       dispatch({
         type: DELETE_ITEM_PRODUCT,
         data: product
+      });
+    }, 100);
+  }
+}
+
+export function checkoutProcess() {
+  return (dispatch) => {
+    setTimeout(() => {
+      dispatch({
+        type: CHECKOUT_PROCESS
       });
     }, 100);
   }

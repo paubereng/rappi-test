@@ -20,6 +20,10 @@ class CartContainer extends Component{
   handleRemoveProductItemToCart = (product) => {
     this.props.deleteItemProductToCart(product);
   }
+  handleCheckoutProcess = () => {
+    console.log('checkout process');
+    this.props.checkoutProcess();
+  }
   renderCartContent = () => {
     let { cart } = this.props.cart;
 
@@ -43,7 +47,7 @@ class CartContainer extends Component{
           />
         </Col>
         <Col xs={12} sm={12} md={4}>
-          <CartCheckout data={cart}/>
+          <CartCheckout data={cart} handleCheckoutProcess={this.handleCheckoutProcess} />
         </Col>
       </Fragment>
     )

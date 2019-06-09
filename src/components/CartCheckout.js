@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import { stringPriceToNumber, replaceDot } from '../utils/utils';
 
-const CartCheckout = ({ data }) => {
+const handleClickButton = (handleCheckoutProcess, ev) => {
+  ev.preventDefault();
+  handleCheckoutProcess();
+}
+
+const CartCheckout = ({ data, handleCheckoutProcess }) => {
   let subtotal = data.reduce((a, b) => {
     let priceFloat = stringPriceToNumber(b['price']);
     return a + (priceFloat * b['cart_quantity']);
@@ -31,14 +36,15 @@ const CartCheckout = ({ data }) => {
         <span>Total:</span> <span>{`$${totalPriceWithComma}`}</span>
       </div>
       <div className="cart-checkout__item">
-        <Button className="cart-checkout__checkout-btn">Checkout</Button>
+        <Button onClick={handleClickButton.bind(this, handleCheckoutProcess)} className="cart-checkout__checkout-btn">Checkout</Button>
       </div>
     </div>
   );
 };
 
 CartCheckout.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object)
+  data: PropTypes.arrayOf(PropTypes.object),
+  handleCheckoutProcess: PropTypes.func.isRequired
 };
 
 export default CartCheckout;
