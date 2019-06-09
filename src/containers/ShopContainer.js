@@ -31,8 +31,8 @@ class ShopContainer extends Component{
   handleResetFilter = (ev) => {
     this.props.productActions.resetProductsFiltered();
   }
-  handleOrder = (name) => {
-    this.props.productActions.getProductsOrdered(name);
+  handleOrder = (name, orderType) => {
+    this.props.productActions.getProductsOrdered(name, orderType);
   }
   handleAddProduct = (product) => {
     this.props.cartActions.addProductToCart(product);
@@ -90,6 +90,7 @@ class ShopContainer extends Component{
     )
   }
   render(){
+    let { order } = this.props.products;
     return (
       <Container className="shop-container">
         <Row>
@@ -101,7 +102,7 @@ class ShopContainer extends Component{
               />
           </Col>
           <Col xs={7} sm={8} md={9} className="col-products">
-            <ProductOrder handleOrder={this.handleOrder}/>
+            <ProductOrder handleOrder={this.handleOrder} prevOrder={order}/>
             {this.renderProductList()}
           </Col>
         </Row>

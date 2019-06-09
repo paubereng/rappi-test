@@ -13,6 +13,7 @@ const initialState = {
   products: [],
   filters: {},
   categories: {},
+  order: {},
   is_loading: false,
   has_error: false
 };
@@ -30,7 +31,7 @@ export default function(state=initialState, action) {
     case RESET_FILTER_PRODUCTS:
       return Object.assign({}, state, { products: action.data });
     case ORDER_PRODUCTS:
-      return Object.assign({}, state, { products: action.data });
+      return Object.assign({}, state, { products: action.data, order: action.order });
     case SEARCH_PRODUCTS:
       return Object.assign({}, state, { products: action.data });
     case IS_LOADING_PRODUCTS:
@@ -120,8 +121,15 @@ function filterProducts(filters, products) {
   return filteredProducts;
 }
 
-function order(property){
-  let sortOrder = -1;
+function order(property, sortOrder){
+  let sortType = 0;
+  if(sortOrder === 1) {
+    sortType = -1;
+  }else if(sortOrder === 2) {
+    sortType = 1;
+  }else {
+    sortType = 0;
+  }
 
   return function (a,b) {
     let result = [];
@@ -132,19 +140,24 @@ function order(property){
     }else {
       result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
     }
-    return result * sortOrder;
+    return result * sortType;
   }
 }
 
-export function getProductsOrdered(orderType) {
+export function getProductsOrdered(property, sortOrder) {
   return (dispatch, getState) => {
     dispatch(isLoading(true));
     setTimeout(() => {
       let productState = getState().products.products;
-      let result = productState.sort(order(orderType));
+      let result = productState.sort(order(property, sortOrder));
+      let newOrder = {
+        name: property,
+        sort_order: sortOrder
+      }
       dispatch({
         type: ORDER_PRODUCTS,
-        data: result
+        data: result,
+        order: newOrder
       });
       dispatch(isLoading(false));
     }, 1000);
@@ -152,17 +165,22 @@ export function getProductsOrdered(orderType) {
 }
 
 export function getProductsFiltered(filters, category) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch(isLoading(true));
     setTimeout(() => {
       let products = fetchProducts();
       let result = [];
+      let { order } = getState().products;
       if(category && category.hasOwnProperty('id')){
         let filteredByCategory = products.filter(product => product.sublevel_id === category.id);
         result = filterProducts(filters, filteredByCategory);
       }else {
         result = filterProducts(filters, products);
       }
+      if(order && order.hasOwnProperty('sort_order') && order.sort_order !== 0) {
+        result = result.sort(order(order.name, order.sort_order));
+      }
+
       dispatch({
         type: FILTER_PRODUCTS,
         data: result,
@@ -194,6 +212,7 @@ export function getProductsSearched(termSearch) {
     setTimeout(() => {
       let { filters } = getState().products;
       let { id } = getState().products.categories;
+      let { order } = getState().products;
       let products = fetchProducts();
       let result = [];
       if(id){
@@ -201,6 +220,10 @@ export function getProductsSearched(termSearch) {
         result = filterProducts(filters, filteredByCategory);
       }else {
         result = filterProducts(filters, products);
+      }
+
+      if(order && order.hasOwnProperty('sort_order') && order.sort_order !== 0) {
+        result = result.sort(order(order.name, order.sort_order));
       }
 
       let productsSearched = result.filter(product => {
