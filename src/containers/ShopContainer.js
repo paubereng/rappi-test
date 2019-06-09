@@ -90,7 +90,7 @@ class ShopContainer extends Component{
     )
   }
   render(){
-    let { order } = this.props.products;
+    let { order, filters } = this.props.products;
     return (
       <Container className="shop-container">
         <Row>
@@ -99,6 +99,7 @@ class ShopContainer extends Component{
               <ProductFilter
                 handleFilter={this.handleFilter}
                 handleResetFilter={this.handleResetFilter}
+                prevFilters={filters}
               />
           </Col>
           <Col xs={7} sm={8} md={9} className="col-products">

@@ -20,11 +20,11 @@ class ProductFilter extends Component{
    }
   }
   componentDidMount() {
-    let { filters } = this.props.products;
-    let keys = Object.keys(filters);
+    let { prevFilters } = this.props;
+    let keys = Object.keys(prevFilters);
     for (let index in keys) {
-      if(filters[keys[index]] !== this.state[keys[index]]){
-        this.setState({ [keys[index]]: filters[keys[index]] });
+      if(prevFilters[keys[index]] !== this.state[keys[index]]){
+        this.setState({ [keys[index]]: prevFilters[keys[index]] });
       }
     }
   }
@@ -108,15 +108,9 @@ class ProductFilter extends Component{
 };
 
 ProductFilter.propTypes = {
-  products: PropTypes.object,
   handleFilter: PropTypes.func.isRequired,
-  handleResetFilter: PropTypes.func.isRequired
+  handleResetFilter: PropTypes.func.isRequired,
+  prevFilters: PropTypes.object
 };
 
-function mapStateToProps(state) {
-  return {
-    products: state.products
-  };
-}
-
-export default connect(mapStateToProps)(ProductFilter);
+export default ProductFilter;
