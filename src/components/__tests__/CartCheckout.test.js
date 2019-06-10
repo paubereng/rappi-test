@@ -31,10 +31,4 @@ describe('CartCheckout container', () => {
     expect(component.find('button').length).toBe(1);
   });
 
-  // it('on click button handleSearchProduct it\'s called 1 time', () => {
-  //   const event = Object.assign(jest.fn(), {preventDefault: () => {}});
-  //   component.find('button').simulate('click', event);
-  //   expect(event).toHaveBeenCalledTimes(1);
-  // });
-
 });
