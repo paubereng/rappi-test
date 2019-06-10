@@ -18,11 +18,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
  4. At this point you can run npm start to see the example app at http://localhost:3000.
 
 ## Made with:
-[React](https://reactjs.org/) as a js framework.
-[Redux](https://redux.js.org/) and [redux-persist](https://github.com/rt2zz/redux-persist) to store the app state. (state management)
-[Redux-thunk](https://github.com/reduxjs/redux-thunk) as a middleware for redux.
-[Jest](https://jestjs.io/) and [enzyme](https://airbnb.io/enzyme/) to testing.
-[Bootstrap](https://react-bootstrap.github.io/) as a css library.
+- [React](https://reactjs.org/) as a js framework.
+- [Redux](https://redux.js.org/) and [redux-persist](https://github.com/rt2zz/redux-persist) to store the app state. (state management)
+- [Redux-thunk](https://github.com/reduxjs/redux-thunk) as a middleware for redux.
+- [Jest](https://jestjs.io/) and [enzyme](https://airbnb.io/enzyme/) to testing.
+- [Bootstrap](https://react-bootstrap.github.io/) as a css library.
 
 
 ## Available Scripts
