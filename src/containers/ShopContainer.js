@@ -14,6 +14,7 @@ import ProductFilter from '../components/ProductFilter';
 import ProductOrder from '../components/ProductOrder';
 import SearchBar from '../components/SearchBar';
 import Spinner from 'react-bootstrap/Spinner';
+import Alert from 'react-bootstrap/Alert';
 
 
 class ShopContainer extends Component{
@@ -67,7 +68,7 @@ class ShopContainer extends Component{
     )
   }
   renderProductList = () => {
-    let { products, is_loading } = this.props.products;
+    let { products, is_loading, has_error } = this.props.products;
     let { name, sublevels } = this.props.products.categories;
     let lastLevel = (name && (!sublevels || sublevels.length === 0)) ? true : false;
 
@@ -76,6 +77,12 @@ class ShopContainer extends Component{
         <div className="spinner-wrapper">
           <Spinner animation="grow" variant="primary" />
         </div>
+      )
+    }else if(has_error) {
+      return(
+        <div className="message-wrapper">
+          <Alert variant="dark">Something went wrong</Alert>
+        </div>  
       )
     }
     return (

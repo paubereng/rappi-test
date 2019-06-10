@@ -3,6 +3,7 @@ import { stringPriceToNumber } from '../utils/utils';
 
 // ACTIONS
 const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
+const FETCH_PRODUCTS_ERROR = 'FETCH_PRODUCTS_ERROR';
 const FILTER_PRODUCTS = 'FILTER_PRODUCTS';
 const RESET_FILTER_PRODUCTS = 'RESET_FILTER_PRODUCTS';
 const ORDER_PRODUCTS = 'ORDER_PRODUCTS';
@@ -37,6 +38,8 @@ export default function(state=initialState, action) {
       return Object.assign({}, state, { products: action.data });
     case IS_LOADING_PRODUCTS:
       return Object.assign({}, state, { is_loading: action.data });
+    case FETCH_PRODUCTS_ERROR:
+      return Object.assign({}, state, { has_error: action.error });
     default:
     return state;
   }
@@ -246,4 +249,12 @@ function isLoading(isLoading) {
       data: isLoading
     });
   }
+}
+  function hasError(error) {
+    return (dispatch) => {
+      dispatch({
+        type: FETCH_PRODUCTS_ERROR,
+        error: error
+      });
+    }
 }
