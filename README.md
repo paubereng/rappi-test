@@ -1,4 +1,29 @@
+# Rappi challenge(Frontend Developer Challenge)
+According to the challenge, I created an e-commerce, called “El Baratón”.
+[Live demo](https://rappi-test.herokuapp.com/).
+
+## Main functionalities:
+- **Filter products** by price range, availability and stock.
+- **Order products** by price, availability and stock.
+- **Category filter** that filters products within that category. If the category doesn’t include sub-levels, it will display a search bar.
+- Add products to the checkout **cart**.
+- Products in the cart **must persist** even if the user closes the browser. They will only be removed if the user completes the checkout process or if the user removes them manually.
+- The design must be **responsive**.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Quick start
+ 1. Make sure that you have Node.js v8.10 and npm v5 or above installed.
+ 2. Clone this repo.
+ 3. Run npm install in order to install dependencies.
+ 4. At this point you can run npm start to see the example app at http://localhost:3000.
+
+## Made with:
+[React](https://reactjs.org/) as a js framework.
+[Redux](https://redux.js.org/) and [redux-persist](https://github.com/rt2zz/redux-persist) to store the app state. (state management)
+[Redux-thunk](https://github.com/reduxjs/redux-thunk) as a middleware for redux.
+[Jest](https://jestjs.io/) and [enzyme](https://airbnb.io/enzyme/) to testing.
+[Bootstrap](https://react-bootstrap.github.io/) as a css library.
+
 
 ## Available Scripts
 
@@ -14,7 +39,11 @@ You will also see any lint errors in the console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.<br>
+Launches the test runner. Test with: <br>
+ - [Mocha](https://mochajs.org/) - The test framework used.
+ - [Chai](https://www.chaijs.com/) - The assertion library used.
+ - [Enzyme](https://airbnb.io/enzyme/) - A JavaScript Testing utility for React.
+
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
