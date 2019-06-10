@@ -20,10 +20,12 @@ class ProductFilter extends Component{
   }
   componentDidMount() {
     let { prevFilters } = this.props;
-    let keys = Object.keys(prevFilters);
-    for (let index in keys) {
-      if(prevFilters[keys[index]] !== this.state[keys[index]]){
-        this.setState({ [keys[index]]: prevFilters[keys[index]] });
+    if(prevFilters && Object.keys(prevFilters).length > 0){
+      let keys = Object.keys(prevFilters);
+      for (let index in keys) {
+        if(prevFilters[keys[index]] !== this.state[keys[index]]){
+          this.setState({ [keys[index]]: prevFilters[keys[index]] });
+        }
       }
     }
   }

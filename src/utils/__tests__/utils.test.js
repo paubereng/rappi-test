@@ -1,4 +1,4 @@
-import { stringPriceToNumber, replaceDot } from './utils';
+import { stringPriceToNumber, replaceDot } from '../utils';
 
 describe('stringPriceToNumber function', () => {
   it('remove dollar sign and convert in number', () => {
